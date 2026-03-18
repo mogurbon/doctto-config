@@ -34,13 +34,19 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'tenant_id' => 'required|string|exists:tenant_invitations,tenant_id',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'tenant_id' => $request->tenant_id,
         ]);
+
+        // Mark invitation as used
+        \App\Models\TenantInvitation::where('tenant_id', $request->tenant_id)
+            ->update(['is_used' => true]);
 
         event(new Registered($user));
 

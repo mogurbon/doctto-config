@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\AgentConfigController;
 
+use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+Route::get('/setup/{tenant_id}', [OnboardingController::class, 'checkTenant'])->name('onboarding.setup');
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

@@ -9,23 +9,27 @@ use Inertia\Inertia;
 
 class OnboardingController extends Controller
 {
-    public function checkTenant($tenant_id)
+   public function checkTenant($tenant_id)
     {
-        // 1. Busca en el modelo TenantInvitation si existe el tenant_id
         $invitation = TenantInvitation::where('tenant_id', $tenant_id)->first();
 
+        // Si NO existe el número en la base de datos -> Mandar al Login
         if (!$invitation) {
-            abort(404, 'Enlace inválido');
+            return redirect()->route('login')->with('status', 'Invitación no encontrada.');
         }
 
-        // 2. Verifica en la tabla users local si ya hay un usuario con ese tenant_id
+        // Si la invitación YA fue usada -> Mandar al Login
+        if ($invitation->is_used) {
+            return redirect()->route('login')->with('status', 'Esta invitación ya fue utilizada.');
+        }
+
+        // Verifica si por alguna razón el usuario ya existe con ese tenant -> Mandar al Login
         $userExists = User::where('tenant_id', $tenant_id)->exists();
-
         if ($userExists) {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('status', 'Ya tienes una cuenta activa.');
         }
 
-        // 3. Si no existe, retorna la vista Auth/Register de Inertia
+        // Si todo está bien y el número es válido -> Mostrar el Formulario de Registro
         return Inertia::render('Auth/Register', [
             'tenant_id' => $tenant_id
         ]);

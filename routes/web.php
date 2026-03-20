@@ -12,14 +12,17 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 Route::get('/setup/{tenant_id}', [OnboardingController::class, 'checkTenant'])->name('onboarding.setup');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
-Route::get('/', function () {
+// Redirige todo el tráfico de la raíz directamente a la pantalla de login
+Route::redirect('/', '/login');
+
+/* Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+}); */
 /* 
  Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

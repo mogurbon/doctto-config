@@ -514,46 +514,6 @@ const form = reactive({
                                                                 </div>
                                                             </div>
                                                         </div>
-
-                                                        <div class="block" data-panel="billing">
-                                                            <div class="mb-5">
-                                                                <h3 class="text-lg font-semibold text-gray-900 italic">Facturación</h3>
-                                                                <p class="text-sm text-gray-500 italic">Datos para CFDI y contacto de facturación.</p>
-                                                            </div>
-
-                                                            <div class="space-y-6">
-                                                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                                    <div>
-                                                                        <label class="block text-sm font-semibold text-gray-700 mb-1 italic">Correo para facturación <span class="text-red-500">*</span></label>
-                                                                        <input type="email" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="facturacion@ejemplo.com" required>
-                                                                        <p class="text-xs text-gray-400 mt-1 italic">Donde reciben solicitudes de CFDI.</p>
-                                                                    </div>
-
-                                                                    <div>
-                                                                        <label class="block text-sm font-semibold text-gray-700 mb-1 italic">Límite para solicitar CFDI (horas) <span class="text-red-500">*</span></label>
-                                                                        <input type="number" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" value="72" required>
-                                                                        <p class="text-xs text-gray-400 mt-1 italic">Tiempo máximo tras la consulta.</p>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div>
-                                                                    <label class="block text-sm font-semibold text-gray-700 mb-1 italic">Régimen del emisor (SAT) <span class="text-red-500">*</span></label>
-                                                                    <select class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" required>
-                                                                        <option value="">Selecciona…</option>
-                                                                        <option value="612">612 — Personas Físicas con Actividades Empresariales y Profesionales</option>
-                                                                        <option value="626">626 — Régimen Simplificado de Confianza (RESICO)</option>
-                                                                        <option value="601">601 — General de Ley Personas Morales</option>
-                                                                    </select>
-                                                                    <p class="text-xs text-gray-400 mt-1 italic">Tal como aparece en tu Constancia de Situación Fiscal.</p>
-                                                                </div>
-
-                                                                <div>
-                                                                    <label class="block text-sm font-semibold text-gray-700 mb-1 italic">Notas de facturación</label>
-                                                                    <textarea class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" rows="3" placeholder="Ej: Solo se factura en el mes de consumo..."></textarea>
-                                                                    <p class="text-xs text-gray-400 mt-1 italic">Cualquier regla o instrucción extra.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

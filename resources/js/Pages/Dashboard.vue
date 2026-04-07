@@ -47,62 +47,6 @@ const form = reactive({
                                            
                                             <section class="bg-white border border-gray-200 rounded-lg shadow-sm text-left mb-6">
                                                 <div class="p-6">
-                                                    <div class="flex flex-wrap items-start justify-between gap-3">
-                                                        <div>
-                                                            <label class="block text-sm font-semibold text-gray-700 mb-1">
-                                                                Tipo de práctica <span class="text-red-500">*</span>
-                                                            </label>
-                                                            <div class="text-sm text-gray-500">Seleccione una opción.</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4" role="radiogroup" aria-label="Tipo de práctica">
-                                                        <div>
-                                                            <input class="peer hidden" type="radio" name="practice_type" id="practice_type_solo" value="solo_practice" required checked />
-                                                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-all peer-checked:border-indigo-600 peer-checked:ring-1 peer-checked:ring-indigo-600 peer-checked:bg-indigo-50" for="practice_type_solo">
-                                                                <span class="mr-4 text-gray-400 peer-checked:text-indigo-600" aria-hidden="true">
-                                                                    <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7">
-                                                                        <path d="M12 12c2.761 0 5-2.239 5-5S14.761 2 12 2 7 4.239 7 7s2.239 5 5 5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                        <path d="M20 22a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                    </svg>
-                                                                </span>
-                                                                <span class="flex flex-col text-left">
-                                                                    <span class="block font-medium text-gray-900 peer-checked:text-indigo-900">Soy consultorio</span>
-                                                                    <span class="block text-sm text-gray-500 peer-checked:text-indigo-700">1 médico</span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-
-                                                        <div>
-                                                            <input class="peer hidden" type="radio" name="practice_type" id="practice_type_clinic" value="clinic_multi_staff" required />
-                                                            <label class="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-all peer-checked:border-indigo-600 peer-checked:ring-1 peer-checked:ring-indigo-600 peer-checked:bg-indigo-50" for="practice_type_clinic">
-                                                                <span class="mr-4 text-gray-400 peer-checked:text-indigo-600" aria-hidden="true">
-                                                                    <svg viewBox="0 0 24 24" fill="none" class="w-7 h-7">
-                                                                        <path d="M16 11c2.209 0 4-1.791 4-4S18.209 3 16 3s-4 1.791-4 4 1.791 4 4 4Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                        <path d="M8 12c2.761 0 5-2.239 5-5S10.761 2 8 2 3 4.239 3 7s2.239 5 5 5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                        <path d="M22 22a6 6 0 0 0-12 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                        <path d="M14 22a8 8 0 0 0-16 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-                                                                    </svg>
-                                                                </span>
-                                                                <span class="flex flex-col text-left">
-                                                                    <span class="block font-medium text-gray-900 peer-checked:text-indigo-900">Somos clínica</span>
-                                                                    <span class="block text-sm text-gray-500 peer-checked:text-indigo-700">Varios médicos</span>
-                                                                </span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                            <section id="clinicBrandSection" style="display:none;" class="bg-white border border-gray-200 rounded-lg shadow-sm text-left mb-6">
-                                                <div class="p-6">
-                                                    <label for="clinic_brand_name" class="block text-sm font-semibold text-gray-700 mb-1">Nombre de la clínica</label>
-                                                    <div class="text-sm text-gray-500 mb-4">Puede dejarlo vacío si no tiene marca.</div>
-                                                    <input type="text" id="clinic_brand_name" name="clinic_brand_name" minlength="2" maxlength="120" placeholder="Ej: Clínica San José" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" />
-                                                    <div id="clinicBrandError" style="display:none;" class="mt-2 text-sm text-red-600">Debe tener entre 2 y 120 caracteres.</div>
-                                                </div>
-                                            </section>
-                                            <section class="bg-white border border-gray-200 rounded-lg shadow-sm text-left mb-6">
-                                                <div class="p-6">
                                                     <label for="time_zone" class="block text-sm font-semibold text-gray-700 mb-1">Zona horaria <span class="text-red-500">*</span></label>
                                                     <div class="text-sm text-gray-500 mb-4">Se usará para horarios, recordatorios y reportes.</div>
                                                     <select id="time_zone" name="time_zone" required minlength="3" maxlength="64" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">

@@ -18,3 +18,9 @@ Es necesario definir la estética visual exacta del concepto "Stripe-Clinical" p
 
 ## Risks / Trade-offs
 - [Riesgo] Contraste pobre entre cyan-500 y texto blanco/claro. → Mitigación: Uso exclusivo de cyan-500 para elementos primarios grandes o fondos oscuros para el texto interior si es necesario.
+
+### Tech Stack Alignment
+- **Framework:** Laravel 12 con Inertia.js.
+- **Frontend:** Vue.js 3 (Composition API) con Tailwind CSS.
+- **Rutas base:** `resources/js/Pages/` y `resources/js/Components/`.
+- **Integración de Datos:** Los datos (citas, pacientes) serán inyectados vía `Props` desde el DashboardController de Laravel a través de Inertia, NO se debe usar una API externa ni mockear.

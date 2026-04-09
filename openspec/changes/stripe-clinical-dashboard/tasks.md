@@ -1,15 +1,8 @@
-## Tasks
+# Tasks
 
-- [x] Refactor de Dashboard.vue
-  - **Archivo a modificar:** `resources/js/Pages/Dashboard.vue`
-  - **Acción:** Reemplazar los contenedores actuales aplicando fondos `bg-slate-50`.
-  - **Criterio de Aceptación:** Las pestañas de navegación (Citas, Pacientes) deben usar los bordes `gray-200` y el color `cyan-500` en estado activo.
-
-- [x] Estilización de Tarjetas (Modularidad)
-  - **Archivos a modificar/crear:** Extraer lógica de tarjetas hacia la carpeta `resources/js/Components/`.
-  - **Acción:** Todo contenedor de información debe usar la clase `shadow-sm` y `rounded-lg` para el efecto Stripe.
-  - **Criterio de Aceptación:** El archivo Dashboard.vue principal no debe exceder las responsabilidades básicas de layout.
-
-- [x] Verificación de Datos Inertia
-  - **Archivo a analizar:** `resources/js/Pages/Dashboard.vue`
-  - **Acción:** Respetar el `defineProps` actual de Vue 3. No romper las variables que ya manda el backend.
+1. Abrir el archivo `resources/js/Components/DoctorSection.vue`.
+2. En la sección `<script setup>`, agregar o verificar que exista la importación: `import { ref } from 'vue';`.
+3. Localizar la variable de estado local que controla las pestañas de los días de la semana y refactorizarla para que use `ref()` de Vue 3.
+4. En el `<template>`, buscar los elementos/botones que representan los días de la semana.
+5. Inyectar o corregir el evento `@click` en cada botón de día para que asigne correctamente el valor a la variable reactiva recién creada.
+6. Guardar los cambios y verificar que no existan errores de sintaxis antes de dar la tarea por concluida.

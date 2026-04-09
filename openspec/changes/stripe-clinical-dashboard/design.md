@@ -1,26 +1,15 @@
+# Technical Design
+
 ## Context
-Es necesario definir la estética visual exacta del concepto "Stripe-Clinical" para el Dashboard principal.
+Actualmente, el panel del componente `DoctorSection.vue` maneja pestañas empleando la variable `activeTab` o equivalentes, pero las pestañas de los días de la semana no responden correctamente a la interacción del usuario por falta de reactividad estricta.
 
-## Goals / Non-Goals
+## Cambios a implementar
+**Archivo:** `resources/js/Components/DoctorSection.vue`
 
-**Goals:**
-- **Tailwind:** Todo el diseño será ejecutado usando clases utilitarias core de Tailwind CSS.
-- **Paleta de Colores:** Integrar de forma preponderante el uso del primario `cyan-500` (`#0ea5e9`).
-- **Fondos:** Uniformar las superficies globales de fondo usando `slate-50`.
-- **Bordes:** Todos los delineados, separadores y campos deben ser definidos usando `gray-200`.
+1. **Gestión del Estado (Vue 3 Composition API):**
+   - Importar `ref` explícitamente al inicio del script: `import { ref } from 'vue';`
+   - Declarar la variable que controla el día de la semana como una referencia reactiva. Por ejemplo: `const activeDay = ref('Lunes');` (El agente deberá ajustar esto al nombre de variable real que use el componente).
 
-**Non-Goals:**
-- No utilizaremos librerías externas de UI de terceros.
-- No alteraremos las interacciones con APIs y backend (n8n).
-
-## Decisions
-- Construir el diseño basándose estrictamente en las directrices numéricas de Tailwind (colores al 500 para interacciones primarias, 50 para fondos) para garantizar alta fidelidad con el concepto de limpieza médica.
-
-## Risks / Trade-offs
-- [Riesgo] Contraste pobre entre cyan-500 y texto blanco/claro. → Mitigación: Uso exclusivo de cyan-500 para elementos primarios grandes o fondos oscuros para el texto interior si es necesario.
-
-### Tech Stack Alignment
-- **Framework:** Laravel 12 con Inertia.js.
-- **Frontend:** Vue.js 3 (Composition API) con Tailwind CSS.
-- **Rutas base:** `resources/js/Pages/` y `resources/js/Components/`.
-- **Integración de Datos:** Los datos (citas, pacientes) serán inyectados vía `Props` desde el DashboardController de Laravel a través de Inertia, NO se debe usar una API externa ni mockear.
+2. **Interacción en el Template:**
+   - Enlazar el evento de clic en los botones de los días para actualizar el valor reactivo: `@click="activeDay = diaSeleccionado"`.
+   - Aplicar clases dinámicas para mostrar la pestaña activa dependiendo del valor actual de la variable reactiva.

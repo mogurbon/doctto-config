@@ -5,3 +5,5 @@ Actualmente, las pestañas de los días de la semana en la configuración de la 
 - Refactorizar el manejo del estado en `resources/js/Components/DoctorSection.vue` para utilizar explícitamente Composition API con `<script setup>`.
 - Implementar una referencia de estado local reactivo (`ref`) para controlar qué pestaña está activa.
 - Actualizar el template para renderizar el contenido dinámicamente según la pestaña seleccionada utilizando la directiva `v-if`.
+
+Nota técnica: Es obligatorio sustituir los watchers por propiedades computadas (computed) y usar optional chaining (props.doctor?.hours) para prevenir errores si la data carga de forma asíncrona.

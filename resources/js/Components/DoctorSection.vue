@@ -12,6 +12,7 @@ const emit = defineEmits(['update:modelValue']);
 const form = props.modelValue;
 
 const activeTab = ref('profile');
+const activeDay = ref('lunes');
 </script>
 
 <template>
@@ -135,19 +136,19 @@ const activeTab = ref('profile');
                             </div>
                             <div class="border-b border-gray-200 mb-4">
                                 <nav class="-mb-px flex space-x-4 overflow-x-auto">
-                                    <button type="button" class="border-cyan-500 text-cyan-600 py-2 px-1 border-b-2 font-medium text-sm">Lunes</button>
-                                    <button type="button" class="border-gray-200 text-gray-500 py-2 px-1 border-b-2 font-medium text-sm">Martes</button>
-                                    <button type="button" class="border-gray-200 text-gray-500 py-2 px-1 border-b-2 font-medium text-sm">Miércoles</button>
-                                    <button type="button" class="border-gray-200 text-gray-500 py-2 px-1 border-b-2 font-medium text-sm">Jueves</button>
-                                    <button type="button" class="border-gray-200 text-gray-500 py-2 px-1 border-b-2 font-medium text-sm">Viernes</button>
+                                    <button @click="activeDay = 'lunes'" type="button" class="py-2 px-1 border-b-2 font-medium text-sm transition-colors focus:outline-none" :class="activeDay === 'lunes' ? 'border-cyan-500 text-cyan-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">Lunes</button>
+                                    <button @click="activeDay = 'martes'" type="button" class="py-2 px-1 border-b-2 font-medium text-sm transition-colors focus:outline-none" :class="activeDay === 'martes' ? 'border-cyan-500 text-cyan-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">Martes</button>
+                                    <button @click="activeDay = 'miercoles'" type="button" class="py-2 px-1 border-b-2 font-medium text-sm transition-colors focus:outline-none" :class="activeDay === 'miercoles' ? 'border-cyan-500 text-cyan-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">Miércoles</button>
+                                    <button @click="activeDay = 'jueves'" type="button" class="py-2 px-1 border-b-2 font-medium text-sm transition-colors focus:outline-none" :class="activeDay === 'jueves' ? 'border-cyan-500 text-cyan-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">Jueves</button>
+                                    <button @click="activeDay = 'viernes'" type="button" class="py-2 px-1 border-b-2 font-medium text-sm transition-colors focus:outline-none" :class="activeDay === 'viernes' ? 'border-cyan-500 text-cyan-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'">Viernes</button>
                                 </nav>
                             </div>
-                            <div class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
+                            <div v-if="activeDay === 'lunes'" class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
                                 <div class="flex items-center justify-between mb-4">
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" checked class="sr-only peer">
                                         <div class="w-11 h-6 bg-gray-200 peer-focus:ring-cyan-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-slate-50 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-50 after:border-gray-200 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-                                        <span class="ml-3 text-sm font-semibold text-gray-900">¿Abre este día?</span>
+                                        <span class="ml-3 text-sm font-semibold text-gray-900">¿Abre este día? (Lunes)</span>
                                     </label>
                                 </div>
                                 <div class="flex items-center gap-3">
@@ -167,6 +168,37 @@ const activeTab = ref('profile');
                                 <div class="mt-4">
                                     <button type="button" class="text-sm text-cyan-500 font-medium">+ Añadir bloque</button>
                                 </div>
+                            </div>
+                            
+                            <div v-if="activeDay === 'martes'" class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-cyan-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-slate-50 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-50 after:border-gray-200 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                                        <span class="ml-3 text-sm font-semibold text-gray-900">¿Abre este día? (Martes)</span>
+                                    </label>
+                                </div>
+                                <div class="mt-4">
+                                    <button type="button" class="text-sm text-cyan-500 font-medium">+ Añadir bloque</button>
+                                </div>
+                            </div>
+
+                            <div v-if="activeDay === 'miercoles'" class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:ring-cyan-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-slate-50 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-50 after:border-gray-200 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                                        <span class="ml-3 text-sm font-semibold text-gray-900">¿Abre este día? (Miércoles)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div v-if="activeDay === 'jueves'" class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
+                                <div class="text-sm text-gray-500 py-4 text-center">Horarios del jueves configurados aquí.</div>
+                            </div>
+
+                            <div v-if="activeDay === 'viernes'" class="bg-slate-50 p-4 rounded-lg border border-gray-200 mb-6">
+                                <div class="text-sm text-gray-500 py-4 text-center">Horarios del viernes configurados aquí.</div>
                             </div>
                         </div>
 

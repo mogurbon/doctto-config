@@ -1,14 +1,16 @@
 # Technical Design
 
 ## Context
-Actualmente, el panel del componente `DoctorSection.vue` maneja pestañas empleando la variable `activeTab` o equivalente. El problema de reactividad ocurre porque Vue 3 no está rastreando los cambios de esta variable en las sub-pestañas de los días al no estar declarada con el Composition API adecuadamente.
+Actualmente, el panel del componente `resources/js/Components/DoctorSection.vue` maneja pestañas empleando variables estáticas. No se especifica correctamente el paradigma, por lo que la IA podría fallar.
 
 ## Solution
-Migraremos el estado de las pestañas a una referencia reactiva explícita de Vue 3, asegurando que las sub-pestañas de días de la semana actualicen correctamente el DOM.
+Migraremos el estado de las pestañas al paradigma de Vue 3 usando Composition API.
 
-1. **Gestión del Estado:**
-   - Importar `ref` explícitamente: `import { ref } from 'vue';`
-   - Declarar la variable reactiva: `const activeDay = ref('Lunes');` (el agente deberá ajustar el nombre).
+1. **Gestión del Estado Local (Composition API):**
+   - El componente debe usar `<script setup>`.
+   - Se debe importar el método explícitamente: `import { ref } from 'vue';`
+   - Se debe inicializar la variable reactiva: `const activeTab = ref('lunes');`
 
-2. **Template:**
-   - Actualizar el DOM en eventos de clic: `@click="activeDay = diaSeleccionado"`.
+2. **Interacción y Renderizado en el Template:**
+   - Botones de pestañas: Deben actualizar el estado usando `@click="activeTab = 'dia_correspondiente'"`.
+   - Visibilidad de paneles: El contenido de los horarios de cada día debe estar condicionado usando `v-if="activeTab === 'dia_correspondiente'"`.

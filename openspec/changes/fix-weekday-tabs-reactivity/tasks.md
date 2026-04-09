@@ -1,6 +1,5 @@
 # Tasks
 
-- [ ] Tarea 1: Abrir `resources/js/Components/DoctorSection.vue`. En el `<script setup>`, importar `ref` desde 'vue' (`import { ref } from 'vue';`).
-- [ ] Tarea 2: Localizar la variable de estado local de las pestañas de días y refactorizarla a `ref` (ej. `const activeDay = ref('Lunes');` en lugar de una variable estática).
-- [ ] Tarea 3: Actualizar los event listeners `@click` en los botones de los días de la semana para que reaccionen al nuevo estado reactivo.
-- [ ] Tarea 4: Verificar que el componente renderice el contenido correspondiente a la pestaña activa y que las clases CSS cambien sin recargar la página.
+- [ ] Tarea 1: Modificar `resources/js/Components/DoctorSection.vue` para utilizar explícitamente Composition API con `<script setup>`. Importar `ref` de 'vue' e inicializar el estado local reactivo con `const activeTab = ref('lunes');`.
+- [ ] Tarea 2: Actualizar los botones en el template de `resources/js/Components/DoctorSection.vue` para que utilicen `@click="activeTab = 'dia_correspondiente'"` (ej. 'lunes', 'martes', etc.).
+- [ ] Tarea 3: Actualizar el template en `resources/js/Components/DoctorSection.vue` para que la visibilidad de los paneles de contenido de cada día dependa exclusivamente de `v-if="activeTab === 'dia_correspondiente'"`.

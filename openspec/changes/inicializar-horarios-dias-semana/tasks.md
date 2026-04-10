@@ -1,10 +1,8 @@
 # Tareas de implementación
 
-1. Localizar el componente `DoctorSection.vue` (probablemente en `resources/js/Components/` o
-   `resources/js/Pages/`) y abrirlo.
+1. Localizar el componente en `resources/js/Components/DoctorSection.vue` y abrirlo.
 
-2. Implementar la función `normalizeWeekdays(input)` (puede ubicarse en el mismo archivo o en
-   `resources/js/utils/` si se prefiere reutilizarla).
+2. Implementar la lógica de normalización en el bloque de inicialización del estado (donde se define el ref o reactive).
 
 3. Inicializar el estado local usando `normalizeWeekdays(...)` antes de asignarlo a `reactive`
    o `ref`.

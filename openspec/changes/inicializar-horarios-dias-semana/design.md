@@ -64,3 +64,8 @@ export default {
 2. Navegar por las 7 pestañas y verificar que el botón "Añadir bloque" aparece incluso cuando
    no hay horarios.
 3. Probar crear bloques y revisar que se guardan/visualizan correctamente.
+
+## Estructura de Normalización
+La función debe asegurar que el objeto de horarios contenga las llaves en español, coincidiendo con los labels de la UI:
+`['lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo']`.
+Cada llave debe inicializarse como `[]` si no existe en la fuente de datos.

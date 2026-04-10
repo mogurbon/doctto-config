@@ -1,0 +1,13 @@
+name: inicializar-horarios-dias-semana
+title: Inicializar horarios para los 7 días de la semana en DoctorSection.vue
+description: |
+  Asegurar que el estado local de los horarios en el componente Vue siempre tenga las claves
+  para los siete días de la semana (lunes..domingo) inicializadas como arreglos vacíos si no
+  reciben datos del backend. Esto corrige la reactividad y evita pestañas rotas sin botón
+  "Añadir bloque".
+author: copilot-agent
+created: 2026-04-10
+artifacts:
+  - proposal
+  - design
+  - tasks

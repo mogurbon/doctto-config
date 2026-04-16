@@ -9,11 +9,11 @@ use Inertia\Inertia;
 
 class OnboardingController extends Controller
 {
-   public function checkTenant($tenant_id)
+   public function checkTenant($tenant_uuid)
     {
-        $invitation = TenantInvitation::where('tenant_id', $tenant_id)->first();
+        $invitation = TenantInvitation::where('tenant_uuid', $tenant_uuid)->first();
 
-        // Si NO existe el número en la base de datos -> Mandar al Login
+        // Si NO existe el identificador en la base de datos -> Mandar al Login
         if (!$invitation) {
             return redirect()->route('login')->with('status', 'Invitación no encontrada.');
         }
@@ -24,14 +24,15 @@ class OnboardingController extends Controller
         }
 
         // Verifica si por alguna razón el usuario ya existe con ese tenant -> Mandar al Login
-        $userExists = User::where('tenant_id', $tenant_id)->exists();
+        $userExists = User::where('tenant_uuid', $tenant_uuid)->exists();
         if ($userExists) {
             return redirect()->route('login')->with('status', 'Ya tienes una cuenta activa.');
         }
 
-        // Si todo está bien y el número es válido -> Mostrar el Formulario de Registro
+        // Si todo está bien y el identificador es válido -> Mostrar el Formulario de Registro
         return Inertia::render('Auth/Register', [
-            'tenant_id' => $tenant_id
+            'tenant_uuid' => $tenant_uuid,
+            'email' => $invitation->email,
         ]);
     }
 }

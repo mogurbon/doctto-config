@@ -7,15 +7,16 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-    tenant_id: String
+    tenant_uuid: String,
+    email: String
 });
 
 const form = useForm({
     name: '',
-    email: '',
+    email: props.email ?? '',
     password: '',
     password_confirmation: '',
-    tenant_id: props.tenant_id,
+    tenant_uuid: props.tenant_uuid,
 });
 
 const submit = () => {

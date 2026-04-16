@@ -1,0 +1,13 @@
+schema: spec-driven
+created: 2026-04-16
+name: refactor-tenant-workspace-settings
+apply:
+  requires:
+    - tasks
+artifacts:
+  - id: proposal
+    status: done
+  - id: design
+    status: done
+  - id: tasks
+    status: done

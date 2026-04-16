@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\TenantInvitation;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,18 +35,19 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'tenant_id' => 'required|string|exists:tenant_invitations,tenant_id',
+            'tenant_uuid' => 'required|uuid|exists:tenant_invitations,tenant_uuid',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'tenant_id' => $request->tenant_id,
+            'tenant_uuid' => $request->tenant_uuid,
         ]);
 
         // Mark invitation as used
-        \App\Models\TenantInvitation::where('tenant_id', $request->tenant_id)
+        TenantInvitation::where('tenant_uuid', $request->tenant_uuid)
+            ->where('email', $request->email)
             ->update(['is_used' => true]);
 
         event(new Registered($user));

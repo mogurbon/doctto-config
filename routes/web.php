@@ -9,24 +9,11 @@ use App\Http\Controllers\AgentConfigController;
 use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
-Route::get('/setup/{tenant_id}', [OnboardingController::class, 'checkTenant'])->name('onboarding.setup');
+Route::get('/setup/{tenant_uuid}', [OnboardingController::class, 'checkTenant'])->name('onboarding.setup');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
 
 // Redirige todo el tráfico de la raíz directamente a la pantalla de login
 Route::redirect('/', '/login');
-
-/* Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-}); */
-/* 
- Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');  */
 
 Route::get('/dashboard', [AgentConfigController::class, 'index'])->name('dashboard');
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TenantInvitation extends Model
+class WorkspaceSetting extends Model
 {
     use HasFactory, HasUuids;
 
@@ -17,11 +17,19 @@ class TenantInvitation extends Model
      */
     protected $fillable = [
         'tenant_uuid',
-        'email',
-        'role',
-        'token',
-        'expires_at',
-        'is_used',
+        'agenda_rules',
+        'billing_info',
+        'onboarding_completed',
+    ];
+
+    /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        'agenda_rules' => '{"min_notice_hours": 24, "max_ahead_days": 30, "cancel_limit_hours": 12, "arrival_grace_minutes": 15}',
+        'onboarding_completed' => false,
     ];
 
     /**
@@ -32,24 +40,9 @@ class TenantInvitation extends Model
     protected function casts(): array
     {
         return [
-            'expires_at' => 'datetime',
-            'is_used' => 'boolean',
+            'agenda_rules' => 'array',
+            'billing_info' => 'array',
+            'onboarding_completed' => 'boolean',
         ];
-    }
-
-    /**
-     * Check if the invitation is expired.
-     */
-    public function isExpired(): bool
-    {
-        return $this->expires_at->isPast();
-    }
-
-    /**
-     * Check if the invitation is valid.
-     */
-    public function isValid(): bool
-    {
-        return !$this->is_used && !$this->isExpired();
     }
 }

@@ -9,12 +9,14 @@ class InvitationController extends Controller
 {
     public function store(Request $request)
     {
+        
         $request->validate([
-            'tenant_id' => 'required|string|unique:tenant_invitations,tenant_id',
+            'tenant_uuid' => 'required|uuid|unique:tenant_invitations,tenant_uuid',
         ]);
 
+        // 2. Guardamos exactamente el UUID que mandó tu sistema externo
         $invitation = TenantInvitation::create([
-            'tenant_id' => $request->tenant_id,
+            'tenant_uuid' => $request->tenant_uuid,
             'is_used' => false,
         ]);
 

@@ -266,3 +266,6 @@ Vue components must have a single root element.
 - IMPORTANT: Activate `inertia-vue-development` when working with Inertia Vue client-side patterns.
 
 </laravel-boost-guidelines>
+
+
+Idioma Oficial: Toda la documentación generada, propuestas de OpenSpec (opsx), tareas y comentarios de código DEBEN redactarse estrictamente en Español.

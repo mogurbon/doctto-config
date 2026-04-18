@@ -200,3 +200,8 @@ class Customer extends Model
     }
 }
 ```
+
+### Regla de Arquitectura Multi-Tenant (DOCTTO)
+- **Cero Tabla de Tenants:** El sistema NO utiliza una tabla relacional central llamada `tenants`. 
+- **UUID como Fuente de Verdad:** La pertenencia y validación de espacios de trabajo se maneja estrictamente mediante la columna `tenant_uuid` presente en los modelos (ej. `users`, `tenant_invitations`).
+- **Orquestación Externa:** Los `tenant_uuid` son generados y administrados por un orquestador externo. Laravel actúa como receptor pasivo. Nunca intentes crear migraciones, modelos o validaciones contra una tabla `tenants`.

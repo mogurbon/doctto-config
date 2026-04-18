@@ -1,0 +1,1 @@
+schema: spec-driven\ncreated: 2026-04-16\nname: refactor-invitation-controller-uuid\napply:\n  requires:\n    - tasks\nartifacts:\n  - id: proposal\n    status: done\n  - id: design\n    status: done\n  - id: tasks\n    status: done

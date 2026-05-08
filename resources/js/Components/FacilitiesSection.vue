@@ -1,3 +1,7 @@
+<script setup>
+const model = defineModel();
+</script>
+
 <template>
     <section id="facilitiesSection" class="bg-slate-50 border border-gray-200 rounded-lg shadow-sm text-left mb-6">
         <div class="p-6">
@@ -21,9 +25,9 @@
                         </label>
                         <div class="text-sm text-gray-500 mb-3">Si el consultorio cuenta con sala de espera.</div>
                         <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="has_waiting_room" name="has_waiting_room" class="sr-only peer" checked>
+                            <input type="checkbox" id="has_waiting_room" v-model="model.has_waiting_room" class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-cyan-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-slate-50 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-50 after:border-gray-200 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
-                            <span class="ml-3 text-sm font-semibold text-gray-900">Sí</span>
+                            <span class="ml-3 text-sm font-semibold text-gray-900">{{ model.has_waiting_room ? 'Sí' : 'No' }}</span>
                         </label>
                     </div>
 
@@ -31,7 +35,7 @@
                         <label for="waiting_room_capacity" class="block text-sm font-semibold text-gray-700 mb-1">Capacidad de sala de espera</label>
                         <div class="text-sm text-gray-500 mb-2">Opcional. Número aproximado.</div>
                         <div class="flex rounded-md shadow-sm">
-                            <input type="number" id="waiting_room_capacity" name="waiting_room_capacity" min="0" max="200" step="1" placeholder="8" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md border border-gray-200 focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" />
+                            <input type="number" id="waiting_room_capacity" v-model="model.waiting_room_capacity" min="0" max="200" step="1" placeholder="8" class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-l-md border border-gray-200 focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm" />
                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-200 bg-slate-50 text-gray-500 sm:text-sm">
                                 personas
                             </span>
@@ -46,7 +50,7 @@
                     <div>
                         <label for="facility_notes" class="block text-sm font-semibold text-gray-700 mb-1">Comentarios de instalaciones</label>
                         <div class="text-sm text-gray-500 mb-2">Ej: 'Ambiente familiar', 'área para niños', etc.</div>
-                        <textarea id="facility_notes" name="facility_notes" rows="5" placeholder="Ambiente familiar..." class="w-full border-gray-200 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"></textarea>
+                        <textarea id="facility_notes" v-model="model.facility_notes" rows="5" placeholder="Ambiente familiar..." class="w-full border-gray-200 rounded-md shadow-sm focus:ring-cyan-500 focus:border-cyan-500 sm:text-sm"></textarea>
                     </div>
                 </div>
             </div>

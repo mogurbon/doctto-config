@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 import DoctorProfile from './Doctor/DoctorProfile.vue';
 import DoctorContact from './Doctor/DoctorContact.vue';
 import DoctorHours from './Doctor/DoctorHours.vue';
@@ -9,75 +9,15 @@ import DoctorPolicies from './Doctor/DoctorPolicies.vue';
 import DoctorPayments from './Doctor/DoctorPayments.vue';
 import DoctorBilling from './Doctor/DoctorBilling.vue';
 
-const props = defineProps({
-	modelValue: {
-		type: Object,
-		required: true,
-	}
+const model = defineModel({
+    type: Object,
+    required: true,
 });
 
-const emit = defineEmits(['update:modelValue']);
-const form = props.modelValue;
-
-// Asegurar estructura mínima del objeto form para evitar accesos a propiedades undefined
-function ensureFormStructure() {
-	if (!form.profile || typeof form.profile !== 'object') {
-		form.profile = { name: '', specialty: '', age_min: 0, age_max: 99 };
-	}
-	if (!form.contact || typeof form.contact !== 'object') {
-		form.contact = { phone: '', email: '', preferred: 'whatsapp' };
-	}
-	if (!form.rules || typeof form.rules !== 'object') {
-		form.rules = { min_notice: 3, max_ahead: 60 };
-	}
-}
-
-// Inicializar estructura segura
-ensureFormStructure();
-
-// Reasegurar si el objeto modelValue se reemplaza desde fuera
-watch(() => props.modelValue, (nv) => {
-	ensureFormStructure();
-}, { deep: true });
-
-// Normaliza la estructura de horarios para garantizar las 7 claves de la semana.
-function normalizeWeekdays(input = {}) {
-	const days = ['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
-	const out = {};
-	days.forEach(d => {
-		const val = input && Object.prototype.hasOwnProperty.call(input, d) ? input[d] : undefined;
-		out[d] = Array.isArray(val) ? val : [];
-	});
-	return out;
-}
-
-function ensureWeekdaysOnForm() {
-	const days = ['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
-	if (!form.hours || typeof form.hours !== 'object') {
-		// Asignar objeto con las 7 claves si no existe
-		form.hours = normalizeWeekdays({});
-		return;
-	}
-	// Asegurar que cada día exista y sea un array
-	days.forEach(d => {
-		if (!Array.isArray(form.hours[d])) {
-			form.hours[d] = [];
-		}
-	});
-}
-
-// Inicializar al cargar el componente
-ensureWeekdaysOnForm();
-
-// Re-normalizar si la fuente de datos cambia posteriormente
-watch(() => props.modelValue && props.modelValue.hours, (newVal) => {
-	const normalized = normalizeWeekdays(newVal || {});
-	Object.keys(normalized).forEach(k => {
-		form.hours[k] = normalized[k];
-	});
-}, { deep: true });
-
 const activeTab = ref('profile');
+
+// Nota: La inicialización profunda ya se realiza en Dashboard.vue
+// pero mantenemos una comprobación ligera para seguridad si es necesario.
 </script>
 
 <template>
@@ -113,14 +53,14 @@ const activeTab = ref('profile');
 					</div>
 
 					<div class="w-full md:w-3/4 p-6 bg-slate-50">
-						<DoctorProfile v-if="activeTab === 'profile'" v-model="form.profile" />
-						<DoctorContact v-if="activeTab === 'contact'" v-model="form.contact" />
-						<DoctorHours v-if="activeTab === 'hours'" v-model="form.hours" />
-						<DoctorRules v-if="activeTab === 'rules'" v-model="form.rules" />
-						<DoctorServices v-if="activeTab === 'services'" v-model="form" />
-						<DoctorPolicies v-if="activeTab === 'policies'" v-model="form" />
-						<DoctorPayments v-if="activeTab === 'payments'" v-model="form" />
-						<DoctorBilling v-if="activeTab === 'billing'" v-model="form" />
+						<DoctorProfile v-if="activeTab === 'profile'" v-model="model.profile" />
+						<DoctorContact v-if="activeTab === 'contact'" v-model="model.contact" />
+						<DoctorHours v-if="activeTab === 'hours'" v-model="model.hours" />
+						<DoctorRules v-if="activeTab === 'rules'" v-model="model.rules" />
+						<DoctorServices v-if="activeTab === 'services'" v-model="model.services" />
+						<DoctorPolicies v-if="activeTab === 'policies'" v-model="model.policies" />
+						<DoctorPayments v-if="activeTab === 'payments'" v-model="model.payments" />
+						<DoctorBilling v-if="activeTab === 'billing'" v-model="model.billing" />
 					</div>
 				</div>
 			</div>

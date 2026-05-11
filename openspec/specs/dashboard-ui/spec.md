@@ -26,11 +26,11 @@ El envío y validación de datos DEBE realizarse utilizando exclusivamente el he
 
 ### Scenario: Envío Exitoso
 - **WHEN** el usuario hace click en "Guardar" y los datos son válidos
-- **THEN** Inertia realiza una petición POST, muestra un estado de carga y redirige o actualiza la vista sin recargar la página.
+- **THEN** Inertia realiza una petición POST a la ruta `dashboard`, muestra un estado de carga y redirige o actualiza la vista sin recargar la página tras la persistencia exitosa.
 
 ### Scenario: Persistencia de Errores
 - **WHEN** el servidor devuelve errores de validación (422)
-- **THEN** el objeto `form.errors` se puebla automáticamente y los mensajes de error se muestran junto a los inputs correspondientes.
+- **THEN** el objeto `form.errors` se puebla automáticamente y los mensajes de error se muestran junto a los inputs correspondientes, incluso en secciones profundas como servicios o horarios.
 
 ## Requirement: Inicialización Completa del Esquema de Datos
 El formulario DEBE inicializarse con una estructura de datos completa que coincida con el esquema esperado por el backend, evitando errores de "undefined" al acceder a propiedades profundas.

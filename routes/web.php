@@ -1,13 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use App\Http\Controllers\AgentConfigController;
-
-use App\Http\Controllers\OnboardingController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\OnboardingController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/setup/{tenant_uuid}', [OnboardingController::class, 'checkTenant'])->name('onboarding.setup');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
@@ -16,7 +13,7 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 Route::redirect('/', '/login');
 
 Route::get('/dashboard', [AgentConfigController::class, 'index'])->name('dashboard');
-
+Route::post('/dashboard', [AgentConfigController::class, 'store'])->name('dashboard.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

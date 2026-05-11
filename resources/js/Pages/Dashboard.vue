@@ -72,12 +72,10 @@ const form = useForm({
 });
 
 const submitForm = () => {
-    // La ruta 'agent.config.store' se asume que existirá o se usará una genérica por ahora
-    // Si la ruta no existe, Inertia lanzará un error 404 que podremos corregir luego
-    form.post(route('dashboard'), {
+    form.post(route('dashboard.store'), {
         preserveScroll: true,
         onSuccess: () => {
-            // Manejar éxito si es necesario
+            alert('¡Configuración guardada con éxito!');
         },
     });
 };

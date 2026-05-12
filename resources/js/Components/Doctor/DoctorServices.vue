@@ -1,9 +1,10 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 
 const model = defineModel({
-	type: Object,
-	default: () => ({})
+	type: Array,
+	required: true,
+	default: () => []
 });
 
 const expandedServiceIndex = ref(null);
@@ -14,6 +15,7 @@ const createEmptyService = () => ({
 	duration: 30,
 	pricing_type: 'fixed',
 	price: 0,
+	currency: 'MXN', // Agregado según Data Structure en spec.md
 	locked: false,
 	bookable: true,
 	description: '',
@@ -29,22 +31,16 @@ const createEmptyService = () => ({
 	arrival_minutes: 0
 });
 
-onMounted(() => {
-	if (!model.value.services) {
-		model.value.services = [];
-	}
-});
-
 const addService = () => {
-	model.value.services.push(createEmptyService());
-	expandedServiceIndex.value = model.value.services.length - 1;
+	model.value.push(createEmptyService());
+	expandedServiceIndex.value = model.value.length - 1;
 };
 
 const removeService = (index) => {
-	if (model.value.services[index].locked) return;
+	if (model.value[index].locked) return;
 	
 	if (confirm('¿Estás seguro de que deseas eliminar este servicio?')) {
-		model.value.services.splice(index, 1);
+		model.value.splice(index, 1);
 		if (expandedServiceIndex.value === index) {
 			expandedServiceIndex.value = null;
 		} else if (expandedServiceIndex.value > index) {
@@ -63,14 +59,14 @@ const toggleExpand = (index) => {
 </script>
 
 <template>
-	<div v-if="model.services">
+	<div>
 		<div class="mb-5">
 			<h3 class="text-lg font-semibold text-blue-900">Servicios</h3>
 			<p class="text-sm text-slate-500">Configura el catálogo de servicios: nombre, duración, precio y requisitos.</p>
 		</div>
 
 		<!-- Estado vacío -->
-		<div v-if="model.services.length === 0" class="border border-slate-200 rounded-lg p-8 text-center bg-slate-50 mb-6">
+		<div v-if="model.length === 0" class="border border-slate-200 rounded-lg p-8 text-center bg-slate-50 mb-6">
 			<p class="text-slate-500 text-sm italic">No hay servicios capturados.</p>
 		</div>
 
@@ -81,12 +77,12 @@ const toggleExpand = (index) => {
 				<span>Acción</span>
 			</div>
 			<div class="divide-y divide-slate-200">
-				<div v-for="(service, index) in model.services" :key="index" class="px-4 py-3 flex justify-between items-center hover:bg-slate-50 transition-colors">
+				<div v-for="(service, index) in model" :key="index" class="px-4 py-3 flex justify-between items-center hover:bg-slate-50 transition-colors">
 					<div>
 						<p class="text-sm font-semibold text-blue-900">{{ service.name || 'Sin nombre' }}</p>
 						<p class="text-xs text-slate-500">
 							{{ service.duration }} min • 
-							{{ service.pricing_type === 'fixed' ? `$${service.price} MXN` : 'Cotización' }}
+							{{ service.pricing_type === 'fixed' ? `$${service.price} ${service.currency || 'MXN'}` : 'Cotización' }}
 						</p>
 					</div>
 					<button 
@@ -115,7 +111,7 @@ const toggleExpand = (index) => {
 		</div>
 
 		<!-- Formulario Detalle (Acordeón) -->
-		<div v-for="(service, index) in model.services" :key="'form-' + index">
+		<div v-for="(service, index) in model" :key="'form-' + index">
 			<div v-if="expandedServiceIndex === index" class="border border-slate-300 rounded-xl p-6 bg-white shadow-sm mb-6 animate-in fade-in slide-in-from-top-2 duration-300">
 				<!-- Header del servicio -->
 				<div class="flex justify-between items-start gap-4 mb-6">
@@ -316,12 +312,20 @@ const toggleExpand = (index) => {
 					</div>
 					<div v-if="service.pricing_type === 'fixed'">
 						<label class="block text-xs font-bold text-blue-900 uppercase mb-1">Precio aprox. ($)</label>
-						<input 
-							v-model="service.price"
-							type="number" 
-							min="0" step="50"
-							class="w-full text-sm border-slate-200 rounded-md focus:ring-blue-500"
-						>
+						<div class="flex gap-2">
+							<input 
+								v-model="service.price"
+								type="number" 
+								min="0" step="50"
+								class="flex-grow text-sm border-slate-200 rounded-md focus:ring-blue-500"
+							>
+							<input 
+								v-model="service.currency"
+								type="text" 
+								class="w-16 text-xs border-slate-200 rounded-md text-center"
+								placeholder="MXN"
+							>
+						</div>
 					</div>
 					<div v-else class="md:col-span-1">
 						<label class="block text-xs font-bold text-blue-900 uppercase mb-1">Notas de cotización</label>

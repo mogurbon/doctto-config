@@ -53,14 +53,14 @@ const activeTab = ref('profile');
 					</div>
 
 					<div class="w-full md:w-3/4 p-6 bg-slate-50">
-						<DoctorProfile v-if="activeTab === 'profile'" v-model="model.profile" />
-						<DoctorContact v-if="activeTab === 'contact'" v-model="model.contact" />
-						<DoctorHours v-if="activeTab === 'hours'" v-model="model.hours" />
-						<DoctorRules v-if="activeTab === 'rules'" v-model="model.rules" />
-						<DoctorServices v-if="activeTab === 'services'" v-model="model.services" />
-						<DoctorPolicies v-if="activeTab === 'policies'" v-model="model.policies" />
-						<DoctorPayments v-if="activeTab === 'payments'" v-model="model.payments" />
-						<DoctorBilling v-if="activeTab === 'billing'" v-model="model.billing" />
+						<DoctorProfile :class="{ 'hidden': activeTab !== 'profile' }" v-model="model.profile" />
+						<DoctorContact :class="{ 'hidden': activeTab !== 'contact' }" v-model="model.contact" />
+						<DoctorHours :class="{ 'hidden': activeTab !== 'hours' }" v-model="model.hours" />
+						<DoctorRules :class="{ 'hidden': activeTab !== 'rules' }" v-model="model.rules" />
+						<DoctorServices :class="{ 'hidden': activeTab !== 'services' }" v-model="model.services" />
+						<DoctorPolicies :class="{ 'hidden': activeTab !== 'policies' }" v-model="model.policies" />
+						<DoctorPayments :class="{ 'hidden': activeTab !== 'payments' }" v-model="model.payments" />
+						<DoctorBilling :class="{ 'hidden': activeTab !== 'billing' }" v-model="model.billing" />
 					</div>
 				</div>
 			</div>
